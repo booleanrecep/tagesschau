@@ -1,0 +1,16 @@
+name: Style Formatting
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  style_format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install Node
+        uses: actions/setup-node@v1
+      - name: Run prettify
+        run: npm run prettify
