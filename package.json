@@ -16,6 +16,8 @@
     "@heroicons/vue": "^1.0.6",
     "@sentry/tracing": "^6.19.2",
     "@sentry/vue": "^6.19.2",
+    "axios": "^0.26.1",
+    "daisyui": "^2.13.4",
     "pinia": "^2.0.12",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"

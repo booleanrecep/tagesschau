@@ -8,6 +8,6 @@ export default defineConfig({
   plugins: [vue()],
   test: {},
   define: {
-    'process.env': {}
+    'process.env': {},
   }
 })
