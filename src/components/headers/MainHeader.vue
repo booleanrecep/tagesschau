@@ -1,9 +1,19 @@
 <script setup lang="ts">
-import { MenuIcon } from '@heroicons/vue/outline'
+import { MenuIcon,AcademicCapIcon , ArrowCircleLeftIcon } from '@heroicons/vue/outline'
 </script>
 <template>
 	<div :class="mainheader.container">
-		<div :class="mainheader.items" v-for="i in [0, 0, 0]">
+	<div :class="mainheader.items" >
+		<button>
+			<AcademicCapIcon/>
+		</button>
+	</div>
+		<div :class="mainheader.items" >
+		<button>
+			<ArrowCircleLeftIcon/>
+		</button>
+	</div>
+		<div :class="mainheader.items">
 			<button>
 				<MenuIcon />
 			</button>
@@ -18,8 +28,8 @@ import { MenuIcon } from '@heroicons/vue/outline'
 }
 .items {
 	button {
-		width: 3.6rem;
-		height: 3.6rem;
+		width: 45px;
+		height: 45px;
 	}
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUpdated } from 'vue'
-import { MainCard, MainHeader } from '~/components'
+import { MainCard, MainHeader, HorizontalTabs } from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
@@ -15,9 +15,10 @@ onUpdated(() => {
 
 <template>
 	<MainHeader />
-	<ul>
-		<li>
-			<MainCard v-bind="tages.news[0]" />
+	<HorizontalTabs/>
+	<ul class="p-2  mt-4" >
+		<li class="px-3" v-for="n in tages.news">
+			<MainCard v-bind="n" />
 		</li>
 		<!-- <li v-for="n in tages.news"> -->
 		<!-- </li> -->
@@ -27,7 +28,6 @@ onUpdated(() => {
 <style scoped lang="scss">
 ul {
 	list-style: none;
-	margin: 0;
 	display: flex;
 	padding: 0;
 	width: 100%;
@@ -38,7 +38,13 @@ ul {
 	justify-content: center;
 
 	li {
-		width: 100%;
+		width: 30%;
+		@media only screen and (max-width: 900px){
+			width: 40%;
+		}
+			@media only screen and (max-width: 600px){
+			width: 80%;
+		}
 	}
 }
 </style>

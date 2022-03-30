@@ -17,6 +17,6 @@
     }
     
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/components/index.tsdsd"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/components/index.tsdsd", "src/assets/tagesschau.jsx", "src/assets/tagesschau.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

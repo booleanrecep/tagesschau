@@ -25,7 +25,7 @@ const imageBreakPoints: IBreakPoints = {
 	klein1x1: 360,
 	mittelgross1x1: 768,
 	portraetgross8x9: 992,
-	portraetgrossplus8x9: 1200,
+	portraetgrossplus8x9: 3200,
 }
 
 const getBreakPoint = () => {
@@ -35,7 +35,7 @@ const getBreakPoint = () => {
 	const bPointStr = Object.keys(imageBreakPoints)
 		.reverse()
 		.find((k) =>
-			imageBreakPoints[k] === bPointInt ? k : 'portraetgrossplus8x9'
+			imageBreakPoints[k] === bPointInt ? k : ''
 		)
 	breakPoint.value = bPointStr
 }
@@ -50,18 +50,17 @@ onMounted(() => {
 
 <template>
 	<div
-		class="card w-full bg-base-100 shadow-xl cursor-pointer"
+		class="card bg-base-100 shadow-xl cursor-pointer"
 		:key="externalId"
 	>
 		<figure>
 			<img
 				:src="teaserImage[`${breakPoint}`].imageurl"
 				:alt="teaserImage.alttext"
-				class="w-full"
 			/>
 		</figure>
 		<div class="card-body">
-			<div class="badge badge-secondary">{{ topline }}</div>
+			<!-- <div class="badge badge-secondary">{{ topline }}</div> -->
 			<h2 class="card-title">{{ title }}</h2>
 			<p>{{ firstSentence }}</p>
 			<div class="card-actions justify-end">
