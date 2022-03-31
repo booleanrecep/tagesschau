@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import { HomeIcon } from '@heroicons/vue/solid'
+import { useRouter, useRoute } from 'vue-router'
+import { useTagesschau } from '~/stores/useNewpapers/useTagesschau'
+
+const tagesschau = useTagesschau()
+const router = useRouter()
+const route = useRoute()
+const handleTabRoute = (e: Event, tab: string) => {
+	router.push('/tabs/' + tab)
+}
 const tabs: string[] = [
 	'Ukraine',
 	'Corona',
@@ -15,13 +24,21 @@ const tabs: string[] = [
 <template>
 	<div>
 		<div>
-			<ul :class="['tabs tabs-boxed w-full', styles.tabs]">
-				<li :class="['tab', styles.home]">
+			<ul :class="['tabs tabs-boxed w-full overflow-auto', styles.tabs]">
+				<li @click="router.push('/')" :class="['tab', styles.home]">
 					<a href="#">
 						<HomeIcon />
 					</a>
 				</li>
-				<li class="tab" v-for="t in tabs">
+				<li
+					v-for="t in tagesschau.tags"
+					@click="handleTabRoute($event, t)"
+					:class="[
+						'tab text-xl focus-within:tab-active',
+						styles.tab,
+						route.params.tab === t ? 'tab-active' : '',
+					]"
+				>
 					<a href="#"> {{ t }} </a>
 				</li>
 			</ul>
@@ -32,6 +49,11 @@ const tabs: string[] = [
 .tabs {
 	flex-wrap: nowrap !important;
 	white-space: nowrap;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 .home {
 	a {
@@ -39,5 +61,7 @@ const tabs: string[] = [
 			width: 30px;
 		}
 	}
+}
+.tab {
 }
 </style>

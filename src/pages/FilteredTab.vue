@@ -1,35 +1,36 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import { onMounted, watch } from 'vue'
 import { MainCard, MainHeader, HorizontalTabs, Spinner } from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
+import { useRoute } from 'vue-router'
 
 const tages: any = useTagesschau()
-const countToLoad: Ref<number> = ref(10)
+const route = useRoute()
+
+const getTaggedNews = () => {
+	const _t: any = tages.news.filter((t: any) =>
+		t.tags.find(
+			(tt: any) =>
+				tt.tag.toLowerCase() === route.params.tab.toString().toLowerCase()
+		)
+	)
+	return _t
+}
+
+watch(route, () => {
+	getTaggedNews()
+})
 
 onMounted(() => {
-	tages.getData()
-	window.addEventListener('scroll', loadMore)
+	getTaggedNews()
 })
-
-onUnmounted(() => {
-	window.removeEventListener('scroll', loadMore)
-})
-
-const loadMore = () => {
-	if (
-		document.documentElement.scrollTop + window.innerHeight >=
-		document.documentElement.offsetHeight
-	) {
-		countToLoad.value += 10
-	}
-}
 </script>
 
 <template>
 	<MainHeader />
 	<HorizontalTabs />
-	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
-		<li class="px-3" v-for="n in tages.news.slice(0, countToLoad)">
+	<ul v-if="getTaggedNews().length > 0" class="p-2 mt-4">
+		<li class="px-3" v-for="n in getTaggedNews()">
 			<MainCard v-if="n" v-bind="n" />
 		</li>
 	</ul>

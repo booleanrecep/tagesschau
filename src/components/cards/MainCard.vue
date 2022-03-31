@@ -53,7 +53,7 @@ onMounted(() => {
 			<img
 				:src="teaserImage[`${breakPoint}`].imageurl"
 				:alt="teaserImage.alttext"
-				class="w-full"
+				class="w-full max-w-[90%]"
 			/>
 		</figure>
 		<Spinner v-else />

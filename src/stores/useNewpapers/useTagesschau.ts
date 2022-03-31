@@ -21,6 +21,19 @@ export const useTagesschau = defineStore('tagesschau', {
 		news: (state) => {
 			return state.newsData
 		},
+		tags: (state) => {
+			let tags = state.newsData.map((n) => n.tags)
+			tags = tags.map((__t: any) => __t.map((_t: any) => _t.tag.toLowerCase()))
+			const tagsArr: any = []
+			for (let t of tags) {
+				for (let i = 0; i < t.length; i++) {
+					if (!tagsArr.includes(t[i])) {
+						tagsArr.push(t[i])
+					}
+				}
+			}
+			return tagsArr
+		},
 	},
 
 	actions: {
