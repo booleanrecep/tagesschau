@@ -1,28 +1,35 @@
 <script setup lang="ts">
-import { onMounted, onUpdated } from 'vue'
-import { MainCard, MainHeader, HorizontalTabs } from '~/components'
+import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import { MainCard, MainHeader, HorizontalTabs, Spinner } from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
+// const newsToLoad : Ref<object[]>  = ref(tages.news.slice(10))
+
 onMounted(() => {
 	tages.getData()
+	// window.addEventListener("scroll", loadMore)
 })
 
-onUpdated(() => {
-	console.log(tages.news[0])
-})
+// onUnmounted(() => {
+// 	window.removeEventListener("scroll", loadMore)
+// })
+
+// const loadMore = ()=>{
+// 		const countnews = tages.news.slice(10)
+// 		newsToLoad.value.push(countnews)
+// }
 </script>
 
 <template>
 	<MainHeader />
-	<HorizontalTabs/>
-	<ul class="p-2  mt-4" >
-		<li class="px-3" v-for="n in tages.news">
-			<MainCard v-bind="n" />
+	<HorizontalTabs />
+	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
+		<li class="px-3" v-for="n in tages.news.slice(0, 10)">
+			<MainCard v-if="n" v-bind="n" />
 		</li>
-		<!-- <li v-for="n in tages.news"> -->
-		<!-- </li> -->
 	</ul>
+	<Spinner v-else />
 </template>
 
 <style scoped lang="scss">
@@ -36,13 +43,15 @@ ul {
 	flex-direction: row;
 	row-gap: 10px;
 	justify-content: center;
+	padding: 0 4px;
 
 	li {
 		width: 30%;
-		@media only screen and (max-width: 900px){
+		flex: 30%;
+		@media only screen and (max-width: 900px) {
 			width: 40%;
 		}
-			@media only screen and (max-width: 600px){
+		@media only screen and (max-width: 600px) {
 			width: 80%;
 		}
 	}
