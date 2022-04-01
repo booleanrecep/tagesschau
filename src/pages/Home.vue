@@ -5,6 +5,7 @@ import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
 const countToLoad: Ref<number> = ref(10)
+const ulRef: any = ref(null)
 
 onMounted(() => {
 	tages.getData()
@@ -16,10 +17,11 @@ onUnmounted(() => {
 })
 
 const loadMore = () => {
-	if (
-		document.documentElement.scrollTop + window.innerHeight >=
-		document.documentElement.offsetHeight
-	) {
+	const diff = Math.abs(
+		Math.floor(document.documentElement.scrollTop + window.innerHeight) -
+			document.documentElement.offsetHeight
+	)
+	if (diff < 2) {
 		countToLoad.value += 10
 	}
 }
@@ -28,7 +30,7 @@ const loadMore = () => {
 <template>
 	<MainHeader />
 	<HorizontalTabs />
-	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
+	<ul ref="ulRef" v-if="tages.news.length > 0" class="p-2 mt-4">
 		<li class="px-3" v-for="n in tages.news.slice(0, countToLoad)">
 			<MainCard v-if="n" v-bind="n" />
 		</li>
