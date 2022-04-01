@@ -31,7 +31,9 @@ onMounted(() => {
 	<HorizontalTabs />
 	<ul v-if="getTaggedNews().length > 0" class="p-2 mt-4">
 		<li class="px-3" v-for="n in getTaggedNews()">
-			<MainCard v-if="n" v-bind="n" />
+			<Transition>
+				<MainCard v-if="n" v-bind="n" />
+			</Transition>
 		</li>
 	</ul>
 	<Spinner v-else />

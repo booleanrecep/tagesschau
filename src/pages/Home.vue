@@ -5,7 +5,6 @@ import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
 const countToLoad: Ref<number> = ref(10)
-const ulRef: any = ref(null)
 
 onMounted(() => {
 	tages.getData()
@@ -30,9 +29,11 @@ const loadMore = () => {
 <template>
 	<MainHeader />
 	<HorizontalTabs />
-	<ul ref="ulRef" v-if="tages.news.length > 0" class="p-2 mt-4">
+	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
 		<li class="px-3" v-for="n in tages.news.slice(0, countToLoad)">
-			<MainCard v-if="n" v-bind="n" />
+			<Transition>
+				<MainCard v-if="n" v-bind="n" />
+			</Transition>
 		</li>
 	</ul>
 	<Spinner v-else />
@@ -54,6 +55,7 @@ ul {
 	li {
 		width: 30%;
 		flex: 30%;
+		animation: nicely-show-up 3s;
 		@media only screen and (max-width: 900px) {
 			width: 40%;
 		}
@@ -61,5 +63,18 @@ ul {
 			width: 80%;
 		}
 	}
+}
+</style>
+<style>
+.v-enter-active,
+.v-leave-active {
+	transition: opacity 0.5s ease;
+}
+
+.v-enter-from {
+	opacity: 0.3;
+}
+.v-leave-to {
+	opacity: 1;
 }
 </style>
