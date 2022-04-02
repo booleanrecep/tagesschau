@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, Ref, ref } from 'vue'
-import { MainCard, MainHeader, HorizontalTabs, Spinner } from '~/components'
+import {
+	MainCard,
+	MainHeader,
+	HorizontalTabs,
+	Spinner,
+	Broadcast,
+} from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
 const countToLoad: Ref<number> = ref(9)
+const closeModal: Ref<boolean> = ref(false)
 
 onMounted(() => {
 	tages.getData()
@@ -24,11 +31,21 @@ const loadMore = () => {
 		countToLoad.value += 9
 	}
 }
+
+const close = () => {
+	closeModal.value = false
+}
+const open = () => {
+	closeModal.value = true
+}
 </script>
 
 <template>
-	<MainHeader />
+	<MainHeader @open="open" />
 	<HorizontalTabs />
+	<Transition>
+		<Broadcast :show="closeModal" @close="close" />
+	</Transition>
 	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
 		<li class="px-3" v-for="n in tages.news.slice(0, countToLoad)">
 			<Transition>

@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import { MenuIcon, PlayIcon } from '@heroicons/vue/outline'
+import { useRoute } from 'vue-router'
 import tagesschauLogo from '~/assets/tagesschauLogo.svg'
 import tagesschauTitle from '~/assets/tagesschauTitle.svg'
+
+const route = useRoute()
+const emit = defineEmits(['open'])
 </script>
 
 <template>
 	<div :class="mainheader.container">
-		<div :class="mainheader.items">
-			<button :class="mainheader.tageschau">
+		<div :class="['z-50', mainheader.items]">
+			<router-link to="/" :class="mainheader.tageschau">
 				<img :src="tagesschauLogo" />
 				<img :src="tagesschauTitle" />
-			</button>
+			</router-link>
 		</div>
-		<div :class="mainheader.items">
-			<button :class="mainheader.sendung">
+		<div v-if="!route.params.tab" :class="mainheader.items">
+			<button :class="mainheader.sendung" @click="emit('open')">
 				<span> Sendung verpasst? </span>
 				<PlayIcon />
 			</button>

@@ -26,9 +26,7 @@ const tabs: string[] = [
 		<div>
 			<ul :class="['tabs tabs-boxed w-full overflow-auto', styles.tabs]">
 				<li @click="router.push('/')" :class="['tab', styles.home]">
-					<a href="#">
-						<HomeIcon />
-					</a>
+					<HomeIcon />
 				</li>
 				<li
 					v-for="t in tagesschau.tags"
@@ -58,10 +56,8 @@ const tabs: string[] = [
 	}
 }
 .home {
-	a {
-		svg {
-			width: 30px;
-		}
+	svg {
+		width: 30px;
 	}
 }
 .tab {
