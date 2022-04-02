@@ -4,7 +4,7 @@ import { MainCard, MainHeader, HorizontalTabs, Spinner } from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
 const tages: any = useTagesschau()
-const countToLoad: Ref<number> = ref(10)
+const countToLoad: Ref<number> = ref(9)
 
 onMounted(() => {
 	tages.getData()
@@ -21,7 +21,7 @@ const loadMore = () => {
 			document.documentElement.offsetHeight
 	)
 	if (diff < 2) {
-		countToLoad.value += 10
+		countToLoad.value += 9
 	}
 }
 </script>

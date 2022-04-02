@@ -51,6 +51,8 @@ const tabs: string[] = [
 	white-space: nowrap;
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}
@@ -63,5 +65,6 @@ const tabs: string[] = [
 	}
 }
 .tab {
+	padding: 0 12px !important;
 }
 </style>
