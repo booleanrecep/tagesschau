@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { service } from '../../api'
 
-interface Newsdata {
+export interface INews {
 	data: string
 	externalId: string
 	firstSentence: string
@@ -10,11 +10,12 @@ interface Newsdata {
 	title: string
 	topline: string
 	type: string
+	detailsweb: string
 }
 
 export const useTagesschau = defineStore('tagesschau', {
 	state: () => ({
-		newsData: [] as Newsdata[],
+		newsData: [] as INews[],
 	}),
 
 	getters: {
@@ -38,7 +39,7 @@ export const useTagesschau = defineStore('tagesschau', {
 
 	actions: {
 		async getData() {
-			const res = await service.get('news')
+			const res = await service.get('/news')
 			this.newsData = res.data.news
 		},
 	},

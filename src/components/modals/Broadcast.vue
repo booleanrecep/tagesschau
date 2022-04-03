@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, onMounted, onUnmounted } from 'vue'
 import { XIcon, VideoCameraIcon } from '@heroicons/vue/outline'
 import tagesschauLogo from '~/assets/tagesschauLogo.svg'
 defineProps<{
@@ -10,7 +10,7 @@ const emit = defineEmits(['close'])
 
 <template>
 	<div
-		class="w-full h-full absolute flex justify-center top-0 z-30 border-zinc-900 bg-slate-50 border-2 p-20"
+		class="w-full h-full absolute flex justify-center top-0 z-30 border-zinc-900 bg-slate-50 border-2 p-16 overflow-scroll"
 		v-if="show"
 	>
 		<div class="flex flex-col h-[80%] w-[80%] justify-between">
@@ -20,21 +20,23 @@ const emit = defineEmits(['close'])
 			<div class="middle w-full h-96 flex justify-center">
 				<img :src="tagesschauLogo" class="h-96" />
 			</div>
-			<div class="bottom flex justify-between mt-6 h-28">
+			<div class="bottom flex justify-between sm:flex-row flex-col mt-6 h-28">
 				<div class="flex flex-col justify-between">
 					<div>
 						<p class="text-2xl">
 							<span class="bg-emerald-600 uppercase rounded p-2">Video</span>
 							tagesschau 20 Uhr
 						</p>
-						<p class="text-slate-400 text-2xl mt-3">02.04.2022, 20:00 Uhr</p>
+						<p class="text-slate-400 text-2xl mt-3 whitespace-nowrap">
+							02.04.2022, 20:00 Uhr
+						</p>
 					</div>
 					<div class="empty h-8"></div>
 				</div>
 				<div class="flex flex-col justify-between">
 					<div class="empty h-4"></div>
 					<div
-						class="flex items-center bg-slate-400 px-20 w-full rounded text-2xl cursor-pointer"
+						class="flex items-center bg-slate-400 px-0 sm:px-20 w-full rounded text-2xl cursor-pointer"
 					>
 						<p class="whitespace-nowrap mr-2">Weitere sendung</p>
 						<VideoCameraIcon class="w-12 h-12" />

@@ -9,12 +9,12 @@ import {
 } from '~/components'
 import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
 
-const tages: any = useTagesschau()
+const tagesschau: any = useTagesschau()
 const countToLoad: Ref<number> = ref(9)
 const closeModal: Ref<boolean> = ref(false)
 
 onMounted(() => {
-	tages.getData()
+	tagesschau.getData()
 	window.addEventListener('scroll', loadMore)
 })
 
@@ -34,10 +34,14 @@ const loadMore = () => {
 
 const close = () => {
 	closeModal.value = false
+	document.body.style.overflow = 'scroll'
 }
 const open = () => {
 	closeModal.value = true
+	document.body.style.overflow = 'hidden'
 }
+
+// const goToNews = (e: Event, news: {}) => {}
 </script>
 
 <template>
@@ -46,11 +50,13 @@ const open = () => {
 	<Transition>
 		<Broadcast :show="closeModal" @close="close" />
 	</Transition>
-	<ul v-if="tages.news.length > 0" class="p-2 mt-4">
-		<li class="px-3" v-for="n in tages.news.slice(0, countToLoad)">
-			<Transition>
-				<MainCard v-if="n" v-bind="n" />
-			</Transition>
+	<ul v-if="tagesschau.news.length > 0" class="p-2 mt-4">
+		<li class="px-3" v-for="n in tagesschau.news.slice(0, countToLoad)">
+			<router-link :to="`/news/${n.sophoraId}`">
+				<Transition>
+					<MainCard v-if="n" v-bind="n" />
+				</Transition>
+			</router-link>
 		</li>
 	</ul>
 	<Spinner v-else />

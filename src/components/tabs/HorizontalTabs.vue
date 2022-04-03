@@ -47,12 +47,18 @@ const tabs: string[] = [
 .tabs {
 	flex-wrap: nowrap !important;
 	white-space: nowrap;
-	-ms-overflow-style: none; /* IE and Edge */
+	-ms-overflow-style: none;
 	scrollbar-width: none;
 	-webkit-overflow-scrolling: touch;
 
 	&::-webkit-scrollbar {
-		display: none;
+		height: 15px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgb(88, 218, 185);
+		border: 4px solid transparent;
+		border-radius: 8px;
+		background-clip: padding-box;
 	}
 }
 .home {
