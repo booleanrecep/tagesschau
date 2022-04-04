@@ -10,7 +10,6 @@
 			/>
 		</div>
 		<div class="card-body">
-			<!-- <div class="badge badge-secondary">{{ topline }}</div> -->
 			<h2 class="card-title bg-slate-400">{{ 'title' }}</h2>
 			<p class="bg-slate-400">{{ 'firstSentence' }}</p>
 			<div class="card-actions justify-end">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, Ref, watch } from 'vue'
-import { MainCardPreload, Spinner } from '~/components'
+import { Spinner } from '~/components'
 
 defineProps<{
 	teaserImage?: any

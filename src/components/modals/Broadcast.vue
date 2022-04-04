@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, onMounted, onUnmounted } from 'vue'
 import { XIcon, VideoCameraIcon } from '@heroicons/vue/outline'
 import tagesschauLogo from '~/assets/tagesschauLogo.svg'
 defineProps<{

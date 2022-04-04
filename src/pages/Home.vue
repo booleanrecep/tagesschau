@@ -39,8 +39,6 @@ const open = () => {
 	closeModal.value = true
 	document.body.style.overflow = 'hidden'
 }
-
-// const goToNews = (e: Event, news: {}) => {}
 </script>
 
 <template>
