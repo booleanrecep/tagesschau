@@ -31,9 +31,11 @@ onMounted(() => {
 	<HorizontalTabs />
 	<ul v-if="getTaggedNews().length > 0" class="p-2 mt-4">
 		<li class="px-3" v-for="n in getTaggedNews()">
-			<Transition>
-				<MainCard v-if="n" v-bind="n" />
-			</Transition>
+			<router-link :to="`/news/${n.sophoraId}`">
+				<Transition>
+					<MainCard v-if="n" v-bind="n" />
+				</Transition>
+			</router-link>
 		</li>
 	</ul>
 	<Spinner v-else />
