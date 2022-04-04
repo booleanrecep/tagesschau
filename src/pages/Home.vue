@@ -7,14 +7,13 @@ import {
 	Spinner,
 	Broadcast,
 } from '~/components'
-import { useTagesschau } from '../stores/useNewpapers/useTagesschau'
+import { useTagesschau } from '~/stores/useNewpapers/useTagesschau'
 
 const tagesschau: any = useTagesschau()
 const countToLoad: Ref<number> = ref(9)
 const closeModal: Ref<boolean> = ref(false)
 
 onMounted(() => {
-	tagesschau.getData()
 	window.addEventListener('scroll', loadMore)
 })
 
